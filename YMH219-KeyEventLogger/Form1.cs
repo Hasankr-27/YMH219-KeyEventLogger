@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace YMH219_KeyEventLogger
 {
     public partial class Form1 : Form
@@ -11,13 +13,14 @@ namespace YMH219_KeyEventLogger
         private Button btnSave;
         private TextBox txtInput;
         private ListBox lstLog;
+        private Label lblStats;
 
         public Form1()
         {
             InitializeComponent();
 
             Text = "Key Event Logger";
-            ClientSize = new Size(500, 560);
+            ClientSize = new Size(760, 560);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Font = new Font("Segoe UI", 10);
@@ -26,7 +29,7 @@ namespace YMH219_KeyEventLogger
             lblStatus = new Label
             {
                 AutoSize = false,
-                Size = new Size(460, 40),
+                Size = new Size(720, 40),
                 Location = new Point(20, 15),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Font = new Font("Segoe UI", 13, FontStyle.Bold),
@@ -63,16 +66,38 @@ namespace YMH219_KeyEventLogger
                 TabStop = false
             };
 
-            Controls.AddRange(new Control[] { lblStatus, btnStart, btnStop, btnClear, btnSave, lblInput, txtInput, lstLog });
+            // Sağ taraftaki istatistik kutusu
+            var grpStats = new GroupBox
+            {
+                Text = "İstatistikler",
+                Location = new Point(500, 140),
+                Size = new Size(240, 400)
+            };
+            lblStats = new Label
+            {
+                Location = new Point(12, 28),
+                Size = new Size(216, 360),
+                Font = new Font("Consolas", 10)
+            };
+            grpStats.Controls.Add(lblStats);
+
+            Controls.AddRange(new Control[] { lblStatus, btnStart, btnStop, btnClear, btnSave, lblInput, txtInput, lstLog, grpStats });
 
             btnStart.Click += (s, e) => { logger.Start(); UpdateStatus(); };
             btnStop.Click += (s, e) => { logger.Stop(); UpdateStatus(); };
-            btnClear.Click += (s, e) => { logger.Clear(); lstLog.Items.Clear(); FocusInput(); };
+            btnClear.Click += (s, e) =>
+            {
+                logger.Clear();
+                lstLog.Items.Clear();
+                UpdateStats();
+                FocusInput();
+            };
             btnSave.Click += (s, e) => SaveLog();
 
             KeyDown += Form1_KeyDown;
 
             UpdateStatus();
+            UpdateStats();
             ActiveControl = txtInput;
         }
 
@@ -95,11 +120,33 @@ namespace YMH219_KeyEventLogger
 
             lstLog.Items.Add(entry);
             lstLog.TopIndex = lstLog.Items.Count - 1;
+            UpdateStats();
+        }
+
+        // İstatistik kutusunu günceller
+        private void UpdateStats()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"Toplam tuş: {logger.TotalCount}");
+            sb.AppendLine();
+            sb.AppendLine("En çok basılanlar:");
+
+            var top = logger.GetTopKeys(5);
+            if (top.Count == 0)
+            {
+                sb.AppendLine("  (henüz kayıt yok)");
+            }
+            else
+            {
+                for (int i = 0; i < top.Count; i++)
+                    sb.AppendLine($"{i + 1}. {top[i].Key,-12} {top[i].Count}");
+            }
+
+            lblStats.Text = sb.ToString();
         }
 
         private void SaveLog()
         {
-            // Kaydedilecek bir şey yoksa uyar
             if (logger.Entries.Count == 0)
             {
                 MessageBox.Show("Kaydedilecek kayıt yok.", "Bilgi",
