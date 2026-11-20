@@ -1,53 +1,30 @@
-\# Key Event Logger – C# Windows Forms
+# Key Event Logger – C# Windows Forms
 
+YMH 219 Nesne Tabanlı Programlama dersi ek uygulama ödevi kapsamında geliştirilmiş eğitsel bir klavye olayı kaydedicisidir. Uygulama, **yalnızca kendi penceresi aktifken** basılan tuşları tarih-saat bilgisiyle listeler, istatistik çıkarır ve kullanıcı isterse kayıtları `.txt` dosyasına kaydeder.
 
+**Öğrenci:** Hasan Kara – 250541015
 
-YMH 219 Nesne Tabanlı Programlama dersi ek uygulama ödevi kapsamında geliştirilmiş eğitsel bir klavye olayı kaydedicisidir. Uygulama, \*\*yalnızca kendi penceresi aktifken\*\* basılan tuşları tarih-saat bilgisiyle listeler, istatistik çıkarır ve kullanıcı isterse kayıtları `.txt` dosyasına kaydeder.
-
-
-
-\*\*Öğrenci:\*\* Hasan Kara – 250541015
-
-
-
-\## Ekran Görüntüleri
-
-
+## Ekran Görüntüleri
 
 | Kayıt Ekranı | Kaydedilen Dosya |
-
 |---|---|
+| <img width="770" height="594" alt="Kayıt ekranı" src="https://github.com/user-attachments/assets/07de5bbc-35c5-444a-8a00-71b7c1e75465" /> | <img width="531" height="668" alt="TXT dosyası" src="https://github.com/user-attachments/assets/3f0cefaf-ad77-4982-8731-02e9929fd1f1" /> |
 
-| !\[Kayıt ekranı]<img width="770" height="594" alt="kayit" src="https://github.com/user-attachments/assets/07de5bbc-35c5-444a-8a00-71b7c1e75465" />
- | !\[TXT dosyası]<img width="531" height="668" alt="txt_dosyasi" src="https://github.com/user-attachments/assets/3f0cefaf-ad77-4982-8731-02e9929fd1f1" />
- |
+## Kullanılan Teknolojiler
 
+- C#
+- .NET 8
+- Windows Forms
+- `KeyDown` olayı ve `KeyPreview` özelliği
+- `StreamWriter` ile dosya işlemleri
+- LINQ (`GroupBy`, `OrderByDescending`) ile istatistik hesaplama
 
+## Kurulum ve Çalıştırma
 
-\## Kullanılan Teknolojiler
-
-
-
-\- C#
-
-\- .NET 8
-
-\- Windows Forms
-
-\- `KeyDown` olayı ve `KeyPreview` özelliği
-
-\- `StreamWriter` ile dosya işlemleri
-
-\- LINQ (`GroupBy`, `OrderByDescending`) ile istatistik hesaplama
-
-
-
-\## Kurulum ve Çalıştırma
-
-
-
-1\. Depoyu klonlayın:git clone https://github.com/Hasankr-27/YMH219-KeyEventLogger.git
-
+1. Depoyu klonlayın:
+   ```
+   git clone https://github.com/Hasankr-27/YMH219-KeyEventLogger.git
+   ```
 2. `YMH219-KeyEventLogger.sln` dosyasını Visual Studio 2022 veya üzeriyle açın.
 3. .NET 8 SDK yüklü değilse Visual Studio'nun önerdiği şekilde yükleyin.
 4. `F5` ile çalıştırın.
@@ -91,4 +68,3 @@ Bu uygulama gerçek bir sistem keylogger'ı **değildir**:
 - Kayıtlar yalnızca uygulama açıkken bellekte tutulur; kaydedilmeden kapatılırsa silinir.
 - Tuş adları `Keys` enum isimleriyle gösterilir (ör. `OemPeriod`, `D1`), Türkçe karakterler ayrıca gösterilmez.
 - Kayıtları tarih/saat aralığına göre filtreleme özelliği yoktur.
-
