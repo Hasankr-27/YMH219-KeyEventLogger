@@ -18,7 +18,9 @@ YMH 219 Nesne Tabanlı Programlama dersi ek uygulama ödevi kapsamında gelişti
 
 |---|---|
 
-| !\[Kayıt ekranı](screenshots/kayit.png) | !\[TXT dosyası](screenshots/txt\_dosyasi.png) |
+| !\[Kayıt ekranı]<img width="770" height="594" alt="kayit" src="https://github.com/user-attachments/assets/07de5bbc-35c5-444a-8a00-71b7c1e75465" />
+ | !\[TXT dosyası]<img width="531" height="668" alt="txt_dosyasi" src="https://github.com/user-attachments/assets/3f0cefaf-ad77-4982-8731-02e9929fd1f1" />
+ |
 
 
 
